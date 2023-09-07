@@ -1,0 +1,29 @@
+'''
+Test cases for say_my_name function
+'''
+
+from 3-say_my_name import say_my_name 
+
+# Test case 1: Print full name
+>>> say_my_name("John", "Smith")
+My name is John Smith
+
+# Test case 2: Print first name only
+>>> say_my_name("Walter")
+My name is Walter
+
+# Test case 3: Incorrect type for first name (should raise TypeError)
+>>> say_my_name(12, "White")
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
+
+# Test case 4: Incorrect type for last name (should raise TypeError)
+>>> say_my_name("Bob", 42)
+Traceback (most recent call last):
+    ...
+TypeError: last_name must be a string
+
+# Test case 5: Empty first name and last name
+>>> say_my_name("", "")
+My name is
