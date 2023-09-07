@@ -1,4 +1,3 @@
-'''This is a module that defines an addition function'''
 #!/usr/bin/python3
 
 def add_integer(a, b=98):
@@ -7,7 +6,7 @@ def add_integer(a, b=98):
 
     Args:
         a (int or float): The first number to be added.
-        b (int or float, optional): The second number to be added. Defaults to 98.
+        b (int or float): The second number to be added. Defaults to 98.
 
     Returns:
         int: The sum of a and b as an integer.
