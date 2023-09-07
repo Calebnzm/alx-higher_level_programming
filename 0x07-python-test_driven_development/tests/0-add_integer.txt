@@ -1,0 +1,43 @@
+'''
+# Test cases for add_integer function
+
+# Test case 1: Adding two positive integers
+>>> add_integer(1, 2)
+3
+
+# Test case 2: Adding a positive integer and a negative integer
+>>> add_integer(100, -2)
+98
+
+# Test case 3: Adding an integer to the default value of b
+>>> add_integer(2)
+100
+
+# Test case 4: Adding two positive floats (should cast them to integers)
+>>> add_integer(100.3, 2.5)
+102
+
+# Test case 5: Adding an integer and a string (should raise TypeError)
+>>> add_integer(4, "School")
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer
+
+# Test case 6: Adding None to an integer (should raise TypeError)
+>>> add_integer(None)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+# Test case 7: Adding two large integers
+>>> add_integer(999999999999999999999, 1)
+1000000000000000000000
+
+# Test case 8: Adding two negative integers
+>>> add_integer(-5, -7)
+-12
+
+# Test case 9: Adding two negative floats (should cast them to integers)
+>>> add_integer(-5.5, -7.7)
+-13
+'''
