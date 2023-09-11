@@ -1,4 +1,6 @@
-# Here are the doctests for the MyList class in 1-my_list.py
+"""
+ Here are the doctests for the MyList class in 1-my_list.py
+"""
 
 # Import the MyList class
 >>> MyList = __import__('1-my_list').MyList
