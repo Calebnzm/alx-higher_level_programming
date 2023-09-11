@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""a class Square that inherits from Rectangle (9-rectangle.py):"""
+
+"""Module defines a square object"""
+
 
 class BaseGeometry:
     """A class representing base geometry"""
@@ -13,6 +15,7 @@ class BaseGeometry:
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
+
 
 class Rectangle(BaseGeometry):
     """A class rectangle that inherits from BaseGeometry"""
