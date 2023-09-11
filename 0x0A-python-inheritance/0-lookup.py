@@ -2,4 +2,5 @@
 #!/usr/bin/python3
 
 def lookup(obj):
+    """This function returns a classes attributes"""
     return dir(obj)
