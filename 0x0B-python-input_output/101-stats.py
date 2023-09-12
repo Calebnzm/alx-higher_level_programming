@@ -1,39 +1,37 @@
 #!/usr/bin/python3
 """script that reads stdin line by line and computes metrics:"""
-
-
 import sys
+import signal
 
-total_file_size = 0
-status_code_counts = {
-    200: 0, 301: 0, 400: 0, 401: 0,
-    403: 0, 404: 0, 405: 0, 500: 0
-}
-line_count = 0
+def print_stats():
+    """script that reads stdin line by line and computes metrics:"""
+    print("File size: {}".format(total_size))
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] != 0:
+            print("{}: {}".format(code, status_codes[code]))
 
-try:
-    for line in sys.stdin:
-        line_count += 1
-        parts = line.split()
-        if len(parts) >= 7:
-            status_code = int(parts[-2])
-            file_size = int(parts[-1])
-            total_file_size += file_size
+def signal_handler(sig, frame):
+    """script that reads stdin line by line and computes metrics:"""
+    print_stats()
+    sys.exit(0)
 
-            if status_code in status_code_counts:
-                status_code_counts[status_code] += 1
+status_codes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
+total_size = 0
 
-        if line_count % 10 == 0:
-            print("File size: {:d}".format(total_file_size))
-            for code, count in sorted(status_code_counts.items()):
-                if count > 0:
-                    print("{:d}: {:d}".format(code, count))
+signal.signal(signal.SIGINT, signal_handler)
 
-except KeyboardInterrupt:
-    pass  # Handle Ctrl+C gracefully
+for i, line in enumerate(sys.stdin, 1):
+    try:
+        data = line.split()
+        size = int(data[-1])
+        status_code = data[-2]
+        total_size += size
+        if status_code in status_codes:
+            status_codes[status_code] += 1
+    except:
+        pass
 
-finally:
-    print("File size: {:d}".format(total_file_size))
-    for code, count in sorted(status_code_counts.items()):
-        if count > 0:
-            print("{:d}: {:d}".format(code, count))
+    if i % 10 == 0:
+        print_stats()
+print_stats()
+
