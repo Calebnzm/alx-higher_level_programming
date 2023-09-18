@@ -70,29 +70,38 @@ class Base:
     @classmethod
     def save_to_file_csv(cls, list_objs):
         filename = cls.__name__ + ".csv"
-        with open(filename, mode='w', newline='') as file:
+        with open(filename, mode="w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             if cls.__name__ == "Rectangle":
-                for rect in list_objs:
-                    writer.writerow([rect.id, rect.width, rect.height, rect.x, rect.y])
+                for obj in list_objs:
+                    id = obj.id
+                    writer.writerow([id, obj.width, obj.height, obj.x, obj.y])
             elif cls.__name__ == "Square":
-                for square in list_objs:
-                    writer.writerow([square.id, square.size, square.x, square.y])
+                for obj in list_objs:
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
 
     @classmethod
     def load_from_file_csv(cls):
         filename = cls.__name__ + ".csv"
         try:
-            with open(filename, mode='r') as file:
-                reader = csv.reader(file)
-                instances = []
-                for row in reader:
-                    if cls.__name__ == "Rectangle":
-                        rect = Rectangle(int(row[1]), int(row[2]), int(row[3]), int(row[4]), int(row[0]))
-                        instances.append(rect)
-                    elif cls.__name__ == "Square":
-                        square = Square(int(row[1]), int(row[2]), int(row[3]), int(row[0]))
-                        instances.append(square)
-                return instances
+            with open(filename, mode="r", newline="", encoding="utf-8") as f:
+                reader = csv.reader(f)
+                ob = []
+                if cls.__name__ == "Rectangle":
+                    for row in reader:
+                        x = row[1]
+                        y = row[2]
+                        z = row[3]
+                        a = row[4]
+                        b = row[0]
+                        ob.append(cls(int(x), int(y), int(z), int(a), int(b)))
+                elif cls.__name__ == "Square":
+                    for row in reader:
+                        c = row[1]
+                        d = row[2]
+                        e = row[3]
+                        g = row[0]
+                        ob.append(cls(int(c), int(d), int(e), int(g)))
+                return ob
         except FileNotFoundError:
             return []
