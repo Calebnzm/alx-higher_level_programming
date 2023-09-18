@@ -87,7 +87,7 @@ class Rectangle(Base):
         h = self.__height
         x = self.__x
         y = self.__y
-        return ("[Rectangle] {} {}/{} - {}/{}".format(self.id, x, y, w, h))
+        return ("[Rectangle] ({}) {}/{} - {}/{}".format(self.id, x, y, w, h))
 
     def update(self, *args, **kwargs):
         """Updates the rectangle"""
