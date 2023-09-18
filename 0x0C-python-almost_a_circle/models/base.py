@@ -2,6 +2,7 @@
 """This is a module to degine the base class"""
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -69,6 +70,7 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
+        """LOads data to csv file"""
         filename = cls.__name__ + ".csv"
         with open(filename, mode="w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
@@ -82,6 +84,7 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
+        """LOads data from csv"""
         filename = cls.__name__ + ".csv"
         try:
             with open(filename, mode="r", newline="", encoding="utf-8") as f:
@@ -105,3 +108,51 @@ class Base:
                 return ob
         except FileNotFoundError:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        # Create a Turtle graphics window
+        window = turtle.Screen()
+        window.title("Shapes Drawing")
+        window.bgcolor("white")
+
+        # Create a Turtle object
+        pen = turtle.Turtle()
+        pen.speed(1)  # Set drawing speed (adjust as needed)
+
+        # Function to draw a rectangle
+        def draw_rectangle(rect):
+            pen.penup()
+            pen.goto(rect.x, rect.y)
+            pen.pendown()
+            pen.color("blue")  # You can choose your own color
+            pen.begin_fill()
+            for _ in range(2):
+                pen.forward(rect.width)
+                pen.left(90)
+                pen.forward(rect.height)
+                pen.left(90)
+            pen.end_fill()
+
+        # Function to draw a square
+        def draw_square(square):
+            pen.penup()
+            pen.goto(square.x, square.y)
+            pen.pendown()
+            pen.color("red")  # You can choose your own color
+            pen.begin_fill()
+            for _ in range(4):
+                pen.forward(square.size)
+                pen.left(90)
+            pen.end_fill()
+
+        # Draw all rectangles
+        for rect in list_rectangles:
+            draw_rectangle(rect)
+
+        # Draw all squares
+        for square in list_squares:
+            draw_square(square)
+
+        # Close the Turtle graphics window on click
+        window.exitonclick()
